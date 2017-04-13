@@ -35,8 +35,8 @@
 				<p>the fast paced, extremely competitive world of Etch A Sketch art has in the past meant having to fly to shops to negotiate with</p>
 				<p>gallery owners before his competitors.</p>
 
-				<p><strong>Goals:</strong> He is seeking to have a wider array of product available to consumers, side step traveling, limit human interaction,</p>
-				<p>and make purchases when necessary</p>
+				<p><strong>Goals:</strong> He is seeking to Favorite product in order to research a wider array of product for consumers, side step</p>
+				<p>traveling, limit human interaction,and make purchases when necessary</p>
 
 			</article>
 		</main>
