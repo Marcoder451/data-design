@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<Title>Data Design</Title>
+		<Title>Bad Etsy</Title>
 	</head>
 	<body>
 		<header>
