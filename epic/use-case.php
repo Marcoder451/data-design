@@ -23,6 +23,7 @@
 					<li>Billy Clicks desired Product</li>
 					<li>Website Populates product</li>
 					<li>Billy favorites product</li>
+					<li>Website saves favorite</li>
 				</ol>
 			</article>
 		</main>
