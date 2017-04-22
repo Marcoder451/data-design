@@ -2,11 +2,9 @@
 namespace Edu\Cnm\DataDesign;
 require_once("autoload.php");
 /**
- * Small Cross Section of a Etsy like post
+ * Small Cross Section of a Etsy like product
  *
- * This product can be considered a small example of what services like Etsy Store when items are
- * 
- * posted on Etsy. This can easily extend to othe features of Etsy
+ * This product can be considered a small example of what services like Etsy Store when items are posted on Etsy. This can easily extend to other features of Etsy
  *
  *@author Marcus Lester <mlester3@cnm.edu>
  *@version 7.1.0
@@ -41,10 +39,9 @@ class Product {
 	/**
 	 * seller of this product
 	 *
+	 *@param int|null $newProductId id of this Product or null if a new Product
 	 *
-	 * @param int|null $newProductID id of this Product or null if a new Product
-	 *
-	 * @param int $newProtectedId id of the profile that posted this product
+	 *@param int $newProductId id of the profile that posted this product
 	 *
 	 * @param string $newProductContent string containing actual product data
 	 *
@@ -87,20 +84,20 @@ class Product {
 	 *
 	 * @param int|null $newProductId new value of product id
 	 * @throws \RangeException if $newProductId is not positive
-	 * @throws \TypeError if $newproduct is not an integer
+	 * @throws \TypeError if $newProduct is not an integer
 	 **/
-	public function setProductId(?int $newProductID): void {
+	public function setProductId(?int $newProductId): void {
 		//if product id is null immediately return it
-		if($newProductID === null) {
+		if($newProductId === null) {
 			$this->productId = null;
 			return;
 		}
 		// verify the product id is positive
-		if($newProductID <= 0) {
+		if($newProductId <= 0) {
 			throw(new \RangeException("product id is not positive"));
 		}
 		// convert and store the product id
-		$this->productId = $newProductID;
+		$this->productId = $newProductId;
 	}
 
 	/**
