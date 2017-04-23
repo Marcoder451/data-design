@@ -13,7 +13,7 @@ require_once ("autoload.php");
  * @version 7.1.0
  **/
 
-class Profile implements \JsonSerializable {
+ class Profile implements \JsonSerializable {
 	/**
 	 * id for this profile; this is the primary key
 	 * @var int $profileId
@@ -145,7 +145,7 @@ public function getProfileActivationToken(): string {
  */
 public function setProfileActivationToken(?string $newProfileActivationToken): void {
 			if($newProfileActivationToken === null) {
-						$this->$profileActivationToken = null;
+						$this->$newProfileActivationToken = null;
 				return;
 			}
 
@@ -310,4 +310,42 @@ public function setProfileActivationToken(?string $newProfileActivationToken): v
 		// store the phone
 		$this->profilePhone = $newProfilePhone;
 	}
+
+	/**accessor method for profile sslt
+	 *
+	 * @return string representation of the salt hexadecimal
+	 */
+	public function getProfileSalt(): string {
+				return$this->profileSalt;
+	}
+	/**
+	 *  mutator method for profile salt
+	 *
+	 * @param string $newProfileSalt
+	 *
+	 * @throw \InvalidArgumentException if the salt is not secure
+	 *
+	 * @throws\RangeException if the salt is not 64 characters
+	 *
+	 * @throws \TypeError if salt is not a string
+	 */
+	public function setProfileSalt(string  $newProfileSalt): void {
+				// enforce that the salt is properly formatted
+				$newProfileSalt = trim($newProfileSalt);
+				$newProfileSalt = strtolower($newProfileSalt);
+
+				//enforce that the salt is a string representation of a hexadecimal
+				if(!ctype_xdigit($newProfileSalt)) {
+							throw(new \InvalidArgumentException("profile password has is empty or insecure"));
+
+				}
+
+				// enforce that the salt is exactly 64 characters.
+				if(strlen($newProfileSalt) !== 64) {
+							throw(new \RangeException("profile password salt must be 128 characters"));
+				}
+				//store the hash
+				$this->profileSalt = $newProfileSalt;
+	}
+
 }
