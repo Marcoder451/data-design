@@ -14,6 +14,7 @@ require_once ("autoload.php");
  **/
 
  class Profile implements \JsonSerializable {
+
 	/**
 	 * id for this profile; this is the primary key
 	 * @var int $profileId
