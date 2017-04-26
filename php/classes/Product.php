@@ -189,4 +189,79 @@ class Product {
 		$this->productDate = $newProductDate;
 	}
 
+	/**
+	 * inserts this product into mySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection
+	 **/
+	public function insert(\PDO $pdo) : void {
+				// enforce the productId is null (i.e., don't insert a product that already exists)
+				if($this->productId !== null) {
+							throw(new \PDOException("not a new product"));
+				}
+
+				//create query template
+				$query = "INSERT INTO product(productProfileId, productContent, productDate) VALUES					              			(:productProfileId, :productContent, :productDate)";
+				$statement = $pdo->prepare($query);
+
+				// bind the member variables to the place holders in the template
+				$formattedDate = $this->productDate->format("Y-m-d H:i:s");
+				$parameters = ["productProfileId" => $this->productProfileId, "productContent" => 						$this->productContent, "productDate" => $formattedDate];
+				$statement->execute($parameters);
+
+				// update the null productId with what mySQL just gave us
+				$this->productId = intval($pdo->lastInsertId());
+	}
+	/**
+	 * deletes this product from mySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL related erros occur
+	 * @throws \TypeError id $pdo is not a PDO connection object
+	 **/
+	public function delete(\PDO $pdo) : void {
+				// enforce the product is not null (i.e., don't delete a product that hasn't been inserted)
+				if($this->productId === null) {
+							throw(new \PDOException("unable to delete a product that does not exist"));
+				}
+
+				// create query template
+				$query = "DELETE FROM product WHERE productId =:productId";
+				$statement = $pdo->prepare($query);
+
+				// bind the member variables to the place holde in the template
+				$parameters = ["productId" => $this->productId];
+				$statement->execute($parameters);
+	}
+
+	/**
+	 * updates this product in mySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 **/
+	public function update(\PDO $pdo) : void {
+				// enforce the productId is not null (i.e., donn't update a product that hasn't been inserted)
+				if($this->productId === null) {
+							throw(new \PDOException("unable to update a product that does not exist"));
+				}
+
+				// create query template
+				$query = "UPDATE product SET productProfileId = :productProfile, productContent = :productContent, productDate 						= :productDate WHERE productId = :productId";
+				$statement = $pdo->prepare($query);
+
+				// bind the member variable to the place holders on the template
+				$formattedDate = $this->productDate->format("Y-m-d H:i:s");
+				$parameters = ["productProfileId" => $this->productProfileId, "productContent" => $this->productContent, 						"productDate" => $formattedDate, "productId" => $this->productId];
+				$statement-execute($parameters);
+	}
+
+	/**
+	 * getsthe product by content
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 */
 }

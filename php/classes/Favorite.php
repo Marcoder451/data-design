@@ -235,64 +235,24 @@ class Favorite implements \JsonSerializable {
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
 	public static function getFavoriteByFavoriteProfileId(\PDO $pdo, int $favoriteProfileId) : \SplFixedArray {
-		// sanitize the profile id
-		if($favoriteProfileId <= 0) {
-			throw(new \PDOException("profile id is not pasitive"));
-		}
-
-		//create query template
-		$query = "SELECT favoriteProfileId, favoriteProductId, favoriteDate FROM favorite WHERE $favoriteProfileId = :favoriteProfileId";
-		$statement = $pdo->prepare($query);
-
-		// bind the member variables to the place holders in the template
-		@$parameters = ["favoriteProfileId" => $favoriteProfileId];
-		$statement->execute($parameters);
-
-		//build an array of favorites
-		$favorites = new \SplFixedArray($statement->rowCount());
-		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-		while(($row = $statement->fetch()) !== false) {
-			try {
-						$favorite = new Favorite($row["favoriteProfileId"], $row["favoriteProductID"], 			 $row["favoriteDate"]);
-						$favorites[$favorites->key()] = $favorite;
-						$favorites->next();
-			} catch(\Exception $exception) {
-				// if the row couldn't be converted, re throw it
-				throw(new \PDOException($exception->getMessage(), 0, $exception));
-			}
-		}
-		return ($favorites);
-	}
-
-	/**
-	 * gets the favorite by product Id
-	 *
-	 * @oaram \ PDO $pdo PDO connection object
-	 * @param int $favoriteProductId product id to search for
-	 * @return \SplFixedArray aray of favorites found or null if not found
-	 * @throws \PDOException when mySQL related erros occur
-	 * @throws \TypeError when variables are not the correct data type
-	 **/
-	public static Function getFavoriteByFavoriteProductId(\PDO $pdo, int $favoriteProductId) : \SplFixedArray {
-				// sanitize the product id
-				$likeProductId = filter_var($favoriteProductId, FILTER_VALIDATE_INT);
-				if($favoriteProductId <= 0) {
-							throw(new \PDOException("product id is not positive"));
+				// sanitize the profile id
+				if($favoriteProfileId <=0) {
+							throw(new \PDOException("profile id is not pasitive"));
 				}
 
-				// create query template
-				$query = "SELECT favoriteProfileId, favoriteProductId, favoriteDate FROM favorite WHERE 						favoriteProductId = :favoriteProductId";
+				//create query template
+				$query = "SELECT favoriteProfileId, favoriteProductId, favoriteDate FROM favorite WHERE $favoriteProfileId = :favoriteProfileId";
 				$statement = $pdo->prepare($query);
 
 				// bind the member variables to the place holders in the template
-				$parameters = ["favoriteProductId" => $favoriteProductId];
+				@$parameters = ["favoriteProfileId" => $favoriteProfileId];
 				$statement->execute($parameters);
 
 				//build an array of favorites
-				$favorites = new \SplFixedArray($statement->rowCount());
+				$parameters = new \SplFixedArray($statement->rowCount());
 				$statement->setFetchMode(\PDO::FETCH_ASSOC);
 				while(($row = $statement->fetch()) !== false) {
-							try {
+							try{
 										$favorite = new Favorite($row["favoriteProfileId"], $row["favoriteProductID"], $row["favoriteDate"]);
 										$favorites[$favorites->key()] = $favorite;
 										$favorites->next();
