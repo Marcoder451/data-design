@@ -10,7 +10,7 @@
 		</header>
 		<main>
 			<article>
-				<p>Billy Wants to find more Etch A Sketches to favorite, so on 04/13/17 at 11:03am he logs on to Bad Etsy.</p>
+				<p>Billy Wants to find more Etch A Sketches to favorite and possibly buy, so on 04/13/17 at 11:03am he logs on to Bad Etsy.</p>
 				<p>When:Thursday 04/13/17 at 11:04am Billy saw a post for an Etch A Sketch Animator 2000 on Bad Etsy, being sold by EtchyGuy1.</p>
 				<p>Upon checking the post and seeing the product he favorites the product EtchyGuy1 is selling.</p>
 			</article>
