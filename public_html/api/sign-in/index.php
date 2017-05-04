@@ -20,7 +20,7 @@ try {
 		session_start();
 	}
 	// grab mySQL statement
-	$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/ddctiter.ini");
+	$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/ddcbadesty.ini");
 
 	// determine which HTTP method is being used
 	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
@@ -57,7 +57,7 @@ try {
 
 		// if the profile activation is not null throw an error
 		if($profile->getProfileActivationToken() !== null) {
-			throw(new \InvalidArgumentException("you are not allowedto sign in unless you have activated your account", 403));
+			throw(new \InvalidArgumentException("you are not allowed to sign in unless you have activated your account", 403));
 		}
 
 		// hash the password given to  makes sure it matches
