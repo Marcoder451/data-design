@@ -103,7 +103,7 @@ class Favorite implements \JsonSerializable {
 			throw(new \RangeException("product id is not positive"));
 		}
 
-		//convert and store the profile id
+		//convert and store the product id
 		$this->favoriteProductId = $newFavoriteProductId;
 	}
 
@@ -155,7 +155,7 @@ class Favorite implements \JsonSerializable {
 		}
 
 		// create query template
-		$query = "DELETE FROM favorite WHERE FavoriteProfileId = :favoriteProfileId AND favoriteProductId = :favoriteProductId";
+		$query = "DELETE FROM favorite WHERE favoriteProfileId = :favoriteProfileId AND favoriteProductId = :favoriteProductId";
 		$statement = $pdo->prepare($query);
 
 		//bind the member variables to the place holders in the template
@@ -167,7 +167,7 @@ class Favorite implements \JsonSerializable {
 	 * deletes this favorite from mySQL
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @throws \PDOException when mySQL related erros occur
+	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError if $pdo is not a PDO connection object
 	 **/
 	public function delete(\PDO $pdo) : void {
@@ -177,7 +177,7 @@ class Favorite implements \JsonSerializable {
 				}
 
 				// create query template
-				$query = "DELETE FROM favorite WHERE favoriteProfileId = :favoriteProfileId AND favoiteProductId = :favoriteProductId";
+				$query = "DELETE FROM favorite WHERE favoriteProfileId = :favoriteProfileId AND favoriteProductId = :favoriteProductId";
 				$statement = $pdo->prepare($query);
 
 				// bind the member variables to the place holders in the template
@@ -206,7 +206,7 @@ class Favorite implements \JsonSerializable {
 				$query = "SELECT favoriteProfileId, favoriteProductId, favoriteDate FROM favorite WHERE favoriteProfileId = :favoriteProfileId AND favoriteProductId = :favoriteProductId";
 				$statement = $pdo->prepare($query);
 
-				// bind the tweet id and profile id to the place holder in the template
+				// bind the product id and profile id to the place holder in the template
 				$parameters = ["favoriteProfileId" => $favoriteProfileId, "favoriteProductId" => $favoriteProductId];
 				$statement->execute($parameters);
 

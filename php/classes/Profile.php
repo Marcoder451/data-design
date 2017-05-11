@@ -75,7 +75,7 @@ require_once ("autoload.php");
 	  * @param string $newProfileHash string contains the password hash
 	  * @param string $$newProfilePhone this string contains the phone number
 	  * @param string $newProfileSalt this string contains password salt
-	  * @throws \InvalidArgumentException if data values arenot valid
+	  * @throws \InvalidArgumentException if data values are not valid
 	  * @throws \RangeException if data values are out of bounds (e.g., strings too long, negative integers)
 	  * @throws \TypeError if data tpes violate type hints
 	  * @throws \Exception if some other exception occurs
@@ -299,7 +299,7 @@ require_once ("autoload.php");
 
 		 // verify the phone is secure
 		 $newProfilePhone = trim($newProfilePhone);
-		 $newProfilePhone = filter_var($newProfilePhone, FILTER_SANITIZE_STRING, FILTER_FLAG_NOENCODE_QUOTES);
+		 $newProfilePhone = filter_var($newProfilePhone, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		 if(empty($newProfilePhone) === true) {
 			 throw(new \RangeException("profile phone is empty or insecure"));
 		 }
