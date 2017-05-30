@@ -73,7 +73,7 @@ require_once ("autoload.php");
 	  * @param string $newProfileAtHandle string contains the new at handle
 	  * @param string $newProfileEmail string containing email
 	  * @param string $newProfileHash string contains the password hash
-	  * @param string $$newProfilePhone this string contains the phone number
+	  * @param string $newProfilePhone this string contains the phone number
 	  * @param string $newProfileSalt this string contains password salt
 	  * @throws \InvalidArgumentException if data values are not valid
 	  * @throws \RangeException if data values are out of bounds (e.g., strings too long, negative integers)
@@ -81,7 +81,7 @@ require_once ("autoload.php");
 	  * @throws \Exception if some other exception occurs
 	  * @Documentation https://php.net/manual/en/language.oop5.decon.php
 	  **/
-	 public function __construct(?int $newProfileId, ?string $newProfileActivationToken, ?string $newProfieActivationToken, ?string $newProfileAtHandle, string $newProfileEmail, string $newProfileHash, ?string $newProfilePhone, string $newProfileSalt) {
+	 public function __construct(?int $newProfileId, ?string $newProfileActivationToken, ?string $newProfileAtHandle, string $newProfileEmail, string $newProfileHash, ?string $newProfilePhone, string $newProfileSalt) {
 		 try {
 			 $this->setProfileId($newProfileId);
 			 $this->setProfileActivationToken($newProfileActivationToken);
@@ -312,7 +312,7 @@ require_once ("autoload.php");
 		 $this->profilePhone = $newProfilePhone;
 	 }
 
-	 /**accessor method for profile sslt
+	 /**accessor method for profile salt
 	  *
 	  * @return string representation of the salt hexadecimal
 	  */
@@ -355,7 +355,7 @@ require_once ("autoload.php");
 	  * inserts this profile into mySQl
 	  * @param \PDO $pdo connection object
 	  * @throws \PDOException when mySQL related errors occur
-	  * @throws /\TypeErrorif $pdo is not a PDO connection object
+	  * @throws \TypeError if $pdo is not a PDO connection object
 	  **/
 	 public function insert(\PDO $pdo): void {
 		 //enforce the profileId is null (i.e., don't insert a profile that already exists)
@@ -364,7 +364,7 @@ require_once ("autoload.php");
 		 }
 
 		 // create query template
-		 $query = "INSERT INTO profile(profileActivationToken, profileAtHandle, profileEmail, profileHash, profilePhone, profileSalt) VALUES 						(:profileActivationToken, :profileAtHandle, :profileEmail, :profileHash, :profilePhone, :profieSalt)";
+		 $query = "INSERT INTO profile(profileActivationToken, profileAtHandle, profileEmail, profileHash, profilePhone, profileSalt) VALUES (:profileActivationToken, :profileAtHandle, :profileEmail, :profileHash, :profilePhone, :profileSalt)";
 		 $statement = $pdo->prepare($query);
 
 		 // bind the member variables to the placeholders in the template
@@ -407,7 +407,7 @@ require_once ("autoload.php");
 	 public function update(\PDO $pdo): void {
 		 //enforce the profileId is not null (i.e., don't update a profile that does not exist)
 		 if($this->profileId === null) {
-			 throw(new \PDOException("unable to delete a profile that does not exist"));
+			 throw(new \PDOException("unable to update a profile that does not exist"));
 		 }
 
 		 // create query template
@@ -422,7 +422,7 @@ require_once ("autoload.php");
 	 /**
 	  * gets the profile by profile id
 	  *
-	  * @param \PDO $pdo $pdo PDO connection object
+	  * @param \PDO $pdo PDO connection object
 	  * @param int $profileId Profile id to search for
 	  * @return Profile|null Profile or null if not found
 	  * @throws \PDOException when mySQL related errors occur

@@ -18,7 +18,7 @@ $reply = new stdClass();
 	$reply->data = null;
 	try{
 				// grab the mySQL connection
-		$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/ddcbadetsy.ini");
+		$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/badetsy.ini");
 
 		// check the HTTP method being used
 		$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
